@@ -52,7 +52,8 @@ class MPM:
     tc.trace("log_fn = {}", self.log_fn)
 
     try:
-      opts, args = getopt.getopt(sys.argv[1:], 'c:d:', ['continue=', 'dt-multiplier='])
+      opts, args = getopt.getopt(sys.argv[1:3], 'c:d:', ['continue=', 'dt-multiplier=',
+      'codim', 'angle', 'beta', 'friction', 'sand_density', 'rigid_density'])
     except getopt.GetoptError as err:
       print(err)
       # TODO: output usage here
@@ -206,6 +207,7 @@ class MPM:
     frames_dir = os.path.join(self.directory, 'frames')
     taichi.clear_directory_with_suffix(frames_dir, 'bgeo')
     taichi.clear_directory_with_suffix(frames_dir, 'obj')
+    taichi.clear_directory_with_suffix(frames_dir, 'csv')
     # taichi.clear_directory_with_suffix(self.snapshot_directory, 'tcb')
 
   def simulate(self, clear_output_directory=False, print_profile_info=True, frame_update=None, update_frequency=1):
